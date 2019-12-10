@@ -8,7 +8,7 @@ from threading import Thread
 
 
 canactions = {
-    "setShiftD": {"id": 0x3bc, "data":[0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00]},
+    "setShiftD": {"id": 0x3bc, "data":[0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00]},
     "setShiftB": {"id": 0x3bc, "data":[0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00]},
     "setShiftN": {"id": 0x3bc, "data":[0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]},
     "setShiftR": {"id": 0x3bc, "data":[0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]},
@@ -84,11 +84,11 @@ def main():
                 msg = can.Message(arbitration_id=action["id"], data=action["data"], extended_id=False)
                 bus.send(msg)
             elif event.code == "BTN_DPAD_UP" and event.state == 1:
-                data = regularActions["setTemperature"]["data"][1]
+                data = regularActions["setTemperature"]["data"][3]
                 if data < 0x62:
                     regularActions["setTemperature"]["data"][3] += 1
             elif event.code == "BTN_DPAD_DOWN" and event.state == 1:
-                data = regularActions["setTemperature"]["data"][1]
+                data = regularActions["setTemperature"]["data"][3]
                 if data > 0x08:
                     regularActions["setTemperature"]["data"][3] -= 1
             elif event.code == "BTN_DPAD_RIGHT" and event.state == 1:
